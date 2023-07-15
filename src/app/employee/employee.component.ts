@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 
   export class EmployeeComponent implements OnInit {
-    regForm: any
+    regForm: any;
     registration:any;
   employees: any=[]   
     constructor(private router:ActivatedRoute) {  // Creating a constructor for the component that initializes the "router" from ActivatedRoute
@@ -33,13 +33,9 @@ import { ActivatedRoute } from '@angular/router';
       window.location.href='./updatedata' //Navigates to '/updatedata' URL:
      }
 
-
-
-
-  
     show() { // Defining a method "show" that sends a POST request to 'http://localhost:3000/employeer/adddata' with the data from "regForm" and logs the result in the console
       console.log(this.regForm.value)
-      fetch("http://localhost:3000/employeer/adddata", {
+      fetch("https://pear-mysterious-rhinoceros.cyclic.app/employeer/adddata", {
        method:'post',
        headers:{
         "Access-Contol-Allow-Origin": "*",
@@ -55,7 +51,7 @@ import { ActivatedRoute } from '@angular/router';
   } 
   
   getemployee() { // Defining a method "getemployee" that sends a GET request to 'http://localhost:3000/employeer/employees' and logs the result in the console, and sets the "employees" property with the fetched data
-  fetch("http://localhost:3000/employeer/employees", {
+  fetch("https://pear-mysterious-rhinoceros.cyclic.app/employeer/employees", {
    method:'get',
    headers:{
     "Access-Contol-Allow-Origin": "*",
@@ -70,7 +66,7 @@ import { ActivatedRoute } from '@angular/router';
   }
 
   remove(Firstname: any) { // Defining a method "remove" that takes "Firstname" as a parameter, sends a DELETE request to 'http://localhost:3000/employeer/deletedata/' + Firstname, and logs the result in the console
-  fetch("http://localhost:3000/employeer/deletedata/" + Firstname, { 
+  fetch("https://pear-mysterious-rhinoceros.cyclic.app/employeer/deletedata/" + Firstname, { 
        method:'delete', // Method Name 
        headers:{
         "Access-Contol-Allow-Origin": "*",

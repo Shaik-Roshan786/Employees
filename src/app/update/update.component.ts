@@ -23,7 +23,7 @@ export class UpdateComponent implements OnInit {
 
   update(Firstname: any) { // This is a function named update that takes a parameter Firstname of type any.
     localStorage.setItem('employees',JSON.stringify(this.localdata))
-    fetch("http://localhost:3000/employeer/updatedata/" + Firstname, { //fetch API to make an HTTP request to the URL with the Firstname parameter appended to the URL
+    fetch("https://pear-mysterious-rhinoceros.cyclic.app/employeer/updatedata/" + Firstname, { //fetch API to make an HTTP request to the URL with the Firstname parameter appended to the URL
          method:'PUT', // Method Name 
          headers:{
           // "Access-Contol-Allow-Origin": "*", // allows cross-origin requests from any origin (indicated by "*")
