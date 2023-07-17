@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee',
@@ -18,12 +19,12 @@ import { ActivatedRoute } from '@angular/router';
     ngOnInit(): void { // Implementing the "OnInit" lifecycle hook to initialize the component when it is loaded
       this.getemployee() // calls the "getemployee()" method to fetch employee data
         this.regForm = new FormGroup({
-          Firstname: new FormControl(""),
-          Lastname: new FormControl(""),
+          Name: new FormControl(""),
           Company: new FormControl(""),
-          mobile: new FormControl(""),
+          Mobile: new FormControl(""),
           Email: new FormControl(""),
-          Location: new FormControl("")
+          Salary: new FormControl(""),
+          Projectname: new FormControl("")
         })
     }
 
@@ -35,7 +36,7 @@ import { ActivatedRoute } from '@angular/router';
 
     show() { // Defining a method "show" that sends a POST request to 'http://localhost:3000/employeer/adddata' with the data from "regForm" and logs the result in the console
       console.log(this.regForm.value)
-      fetch("https://pear-mysterious-rhinoceros.cyclic.app/employeer/adddata", {
+      fetch("http://localhost:5000/employeer/adddata", {
        method:'post',
        headers:{
         "Access-Contol-Allow-Origin": "*",
@@ -51,7 +52,7 @@ import { ActivatedRoute } from '@angular/router';
   } 
   
   getemployee() { // Defining a method "getemployee" that sends a GET request to 'http://localhost:3000/employeer/employees' and logs the result in the console, and sets the "employees" property with the fetched data
-  fetch("https://pear-mysterious-rhinoceros.cyclic.app/employeer/employees", {
+  fetch("http://localhost:5000/employeer/employees", {
    method:'get',
    headers:{
     "Access-Contol-Allow-Origin": "*",
@@ -65,8 +66,18 @@ import { ActivatedRoute } from '@angular/router';
   console.log(err))
   }
 
-  remove(Firstname: any) { // Defining a method "remove" that takes "Firstname" as a parameter, sends a DELETE request to 'http://localhost:3000/employeer/deletedata/' + Firstname, and logs the result in the console
-  fetch("https://pear-mysterious-rhinoceros.cyclic.app/employeer/deletedata/" + Firstname, { 
+  remove(Name: any) { // Defining a method "remove" that takes "Firstname" as a parameter, sends a DELETE request to 'http://localhost:3000/employeer/deletedata/' + Firstname, and logs the result in the console
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch("http://localhost:5000/employeer/deletedata/" + Name, { 
        method:'delete', // Method Name 
        headers:{
         "Access-Contol-Allow-Origin": "*",
@@ -75,8 +86,18 @@ import { ActivatedRoute } from '@angular/router';
      }).then(res=> res.json()) // converts result into json format
      .then(result=>{ 
        console.log(result) // Displays the Result in Console
-       alert('Employee Data Deleted Succesfully') // Gives An Alert Message With Ok
-    }).catch(err => // Display The Error
-      console.log(err)) 
+    
+
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+       // alert('Employee Data Deleted Succesfully') // Gives An Alert Message With Ok
+      }).catch(err => // Display The Error
+        console.log(err)) 
+      }
+    })
+    
    } 
 }

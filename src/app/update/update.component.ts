@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UpdateService } from '../update.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update',
@@ -21,25 +22,53 @@ export class UpdateComponent implements OnInit {
     console.log(this.localdata)   
   }
 
-  update(Firstname: any) { // This is a function named update that takes a parameter Firstname of type any.
-    localStorage.setItem('employees',JSON.stringify(this.localdata))
-    fetch("https://pear-mysterious-rhinoceros.cyclic.app/employeer/updatedata/" + Firstname, { //fetch API to make an HTTP request to the URL with the Firstname parameter appended to the URL
-         method:'PUT', // Method Name 
-         headers:{
-          // "Access-Contol-Allow-Origin": "*", // allows cross-origin requests from any origin (indicated by "*")
-          "content-Type":'application/json'
-         },
+  // update(Name: any) { // This is a function named update that takes a parameter Firstname of type any.
+  //   localStorage.setItem('employees',JSON.stringify(this.localdata))
+  //   fetch("http://localhost:5000/employeer/updatedata/" + Name, { //fetch API to make an HTTP request to the URL with the Firstname parameter appended to the URL
+  //        method:'PUT', // Method Name 
+  //        headers:{
+  //         // "Access-Contol-Allow-Origin": "*", // allows cross-origin requests from any origin (indicated by "*")
+  //         "content-Type":'application/json'
+  //        },
          
-         body: JSON.stringify(this.localdata) // Pass the updated data in the request body
-       })
+  //        body: JSON.stringify(this.localdata) // Pass the updated data in the request body
+  //      })
       
-       .then(res=> res.json()) // converts result into json format
-       .then(result=>{ 
-         console.log(result) // Displays the Result in Console
-         alert('Changes Updated Succesfully')
-         window.location.href='./employee' // Gives An Alert Message With Ok
+  //      .then(res=> res.json()) // converts result into json format
+  //      .then(result=>{ 
+  //        console.log(result) // Displays the Result in Console
+  //        alert('Changes Updated Succesfully')
+  //        window.location.href='./employee' // Gives An Alert Message With Ok
+  //     })
+  //     .catch(err => // Display The Error
+  //       console.log(err)) 
+  //    } 
+
+  update(Name: any) {
+    localStorage.setItem('employees', JSON.stringify(this.localdata));
+    fetch("http://localhost:5000/employeer/updatedata/" + Name, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify(this.localdata) // Pass the updated data in the request body
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Updated successfully',
+          showConfirmButton: false,
+          timer: 1800
+        })
+       
       })
-      .catch(err => // Display The Error
-        console.log(err)) 
-     } 
+      
+      .catch(err => console.log(err));
+      window.location.href = './employee';
+  }
+  
+
 }

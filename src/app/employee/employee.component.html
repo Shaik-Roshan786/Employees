@@ -1,17 +1,13 @@
-<div class="main">
+<div style="background-image: url('https://img.freepik.com/free-vector/office-background-video-conferencing_23-2148638212.jpg');" class="main">
 
 <form class="addemployee" [formGroup]="regForm">
-  <h4 class="main-heading">Register Here</h4>
+  <h4 style="color: black; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;margin-left: 50px;" class="main-heading">Register Here</h4>
   <br>
   <div class="container justify-content-center">
   <div class="form-row">
     <div class="col-md-4 mb-3">
-      <label for="validationCustom01">First name</label>
-      <input type="text" class="form-control" id="validationCustom01" formControlName="Firstname" placeholder="Enter Your First name" value="" required> 
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationCustom02">Last name</label>
-      <input type="text" class="form-control" id="validationCustom02" formControlName="Lastname" placeholder="Enter Your Last name" value="" required>     
+      <label for="validationCustom01">Name</label>
+      <input type="text" class="form-control" id="validationCustom01" formControlName="Name" placeholder="Enter Your Name" value="" required> 
     </div>
     <div class="col-md-4 mb-3">
       <label for="validationCustom02">Email </label>
@@ -22,36 +18,40 @@
       <input type="text" class="form-control" id="validationCustom01" formControlName="Company" placeholder="Enter Your Company Name" value="" required> 
     </div>
     <div class="col-md-4 mb-3">
-      <label for="validationCustom02">Location</label>
-      <input type="text" class="form-control" id="validationCustom02" formControlName="Location" placeholder="Enter Your Location" value="" required>     
+      <label for="validationCustom02">Salary</label>
+      <input type="text" class="form-control" id="validationCustom02" formControlName="Salary" placeholder="Enter Your Salary" value="" required>     
+    </div>
+     <div class="col-md-4 mb-3">
+      <label for="validationCustom02">Project Name</label>
+      <input type="text" class="form-control" id="validationCustom02" formControlName="Projectname" placeholder="Enter Your Projectname" value="" required>     
     </div>
     <div class="col-md-4 mb-3">
       <label for="validationCustom02">Mobile</label>
-      <input type="text" class="form-control" id="validationCustom02" formControlName="mobile" placeholder="Enter Your Mobile Number" value="" required>
+      <input type="text" class="form-control" id="validationCustom02" formControlName="Mobile" placeholder="Enter Your Mobile Number" value="" required>
     </div>
   </div>
-      <button class="btn btn-success postbutton" (click)="show()">Save</button>
+      <button class="btn btn-success postbutton" (click)="show()">Post</button>
   </div>
 </form>
 </div>
 <br>
 <br>
-
+<!-- 
 <div class="bg-container">
 <div class="row">
-  <div class="row row-cols-2 sm-2 row-cols-md-4"> <!--Grid Class Medium Devices - Scrren Width >= 768px-->
-    <div *ngFor="let regForm of employees">  <!--Repeats a node for each item in a list--> 
+  <div class="row row-cols-2 sm-2 row-cols-md-4"> 
+    <div *ngFor="let regForm of employees"> 
     <div class="card" > 
       <div class="card-body bg-image">
         
-        <p>First Name : {{ regForm.Firstname }}</p>
-        <p>Last Name : {{ regForm.Lastname }}</p>
+        <p>Name : {{ regForm.Name }}</p>
         <p>Company &nbsp; : {{ regForm.Company }}</p>
-        <p>Mobile No : {{ regForm.mobile }}</p>
+        <p>Mobile No : {{ regForm.Mobile }}</p>
         <p>Email Id &nbsp; &nbsp; &nbsp;: {{ regForm.Email }}</p>
-        <p>Location &nbsp; &nbsp;: {{ regForm.Location }}</p>
+        <p>Salary : {{ regForm.Salary }}</p>
+        <p>Projectname : {{ regForm.Projectname }}</p>
        
-        <button class="btn btn-danger deletebutton" (click)="remove(regForm.Firstname)">Delete</button>
+        <button class="btn btn-danger deletebutton" (click)="remove(regForm.Name)">Delete</button>
         <button  class="btn btn-primary updatebutton" (click)="update(regForm)">Edit</button>
         <i claass="fa fa-edit" style="font-size: 20px; color: blue;"></i> 
     </div>
@@ -59,7 +59,35 @@
 </div> 
 </div>
 </div>
-</div>
+</div> -->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Salary</th>
+      <th>Project Name</th>
+      <th>Mobile</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{ employee.Name }}</td>
+      <td>{{ employee.Email }}</td>
+      <td>{{ employee.Company }}</td>
+      <td>{{ employee.Salary }}</td>
+      <td>{{ employee.Projectname }}</td>
+      <td>{{ employee.Mobile }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="update(employee)">Update</button>
+        <button style="margin-left: 20px;"  class="btn btn-danger" (click)="remove(employee.Name)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 
 
