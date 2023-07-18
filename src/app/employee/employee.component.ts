@@ -46,6 +46,4 @@ import Swal from 'sweetalert2';
     }).catch(err =>
       console.log(err))
   } 
-  
- 
 }
