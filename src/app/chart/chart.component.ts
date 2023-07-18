@@ -1,5 +1,4 @@
-import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
-import { DataService } from '../data.service';
+import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -7,45 +6,55 @@ import { Chart } from 'chart.js';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit, AfterViewInit {
-  data: any[] = [];
-  chart: any;
+export class ChartComponent implements OnInit {
+  employees: any[] = []; // Array to store fetched employee data
+  ctx: any; // Canvas context
+  config: any; // Chart configuration
+  chartData: number[] = []; // Array to store chart data
+  chartDatalabels: any[] = []; // Array to store chart labels
 
-  constructor(@Inject(DataService) private dataService: DataService) { }
-
-  ngOnInit(): void {
-    this.dataService.getData().subscribe((response) => {
-      this.data = response;
-    });
-  }
-
-  ngAfterViewInit(): void {
-    this.createChart();
-  }
-
-  createChart(): void {
-    const labels = this.data.map((item) => item.name);
-    const values = this.data.map((item) => item.value);
-
-    this.chart = new Chart('chartCanvas', {
+  ngOnInit() {
+    this.ctx = document.getElementById('myChart'); // Get canvas element
+    this.config = {
       type: 'bar',
+      options: {},
       data: {
-        labels: labels,
-        datasets: [{
-          label: 'Data Values',
-          data: values,
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+        labels: this.chartDatalabels, // Set chart labels
+        datasets: [
+          {
+            label: "Chart Data",
+            data: this.chartData, // Set chart data
+            borderWidth: 10,
+            backgroundColor: ['red', 'yellow', 'blue']
           }
-        }
+        ]
       }
-    });
+    };
+
+    const myChart = new Chart(this.ctx, this.config); // Create new chart instance
+
+    // Fetch data from the API and update the chart
+    fetch("http://localhost:5000/employeer/employees", {
+      method: 'get',
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then(res => res.json()) // Convert response to JSON
+      .then(result => {
+        console.log(result); // Log the fetched result
+        this.employees = result.employees; // Store fetched employee data
+
+        console.log(this.employees); // Log the stored employee data
+
+        // Update the chart data and labels based on the fetched data
+        this.chartData = this.employees.map((employee: any) => employee.Salary); // Extract salaries from employee data
+        this.chartDatalabels = this.employees.map((employee: any) => employee.Name); // Extract names from employee data
+
+        myChart.data.labels = this.chartDatalabels; // Update chart labels
+        myChart.data.datasets[0].data = this.chartData; // Update chart data
+        myChart.update(); // Update the chart with new data
+      })
+      .catch(err => console.log(err)); // Log any errors that occur during the fetch request
   }
 }

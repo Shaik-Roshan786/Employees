@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeComponent } from './employee/employee.component';
@@ -11,10 +12,14 @@ import { HomeComponent } from './home/home.component';
 import {  NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { TableComponent } from './table/table.component';
-import { ChartComponent } from './chart/chart.component';
-
+import { Chart,Colors } from 'chart.js';
+import { registerables } from 'chart.js';
+Chart.register(...registerables)
 import { DataService } from './data.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { VideosComponent } from './videos/videos.component';
+import { DetailsComponent } from './details/details.component';
+import { ChartComponent } from './chart/chart.component';
 
 
 @NgModule({
@@ -25,8 +30,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HomeComponent,
     AboutusComponent,
     // TableComponent,
-    ChartComponent,
-    DashboardComponent
+   
+    DashboardComponent,
+    VideosComponent,
+    DetailsComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +43,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    
+    
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

@@ -5,7 +5,9 @@ import { UpdateComponent } from './update/update.component';
 import { HomeComponent } from './home/home.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { TableComponent } from './table/table.component';
+import { DetailsComponent } from './details/details.component';
 import { ChartComponent } from './chart/chart.component';
+
 
 
 const routes: Routes = [
@@ -15,6 +17,9 @@ const routes: Routes = [
   {path: 'aboutus', component: AboutusComponent},
   { path: 'table', component: TableComponent },
   { path: 'chart', component: ChartComponent },
+  { path: 'details', component: DetailsComponent },
+  // { path: 'chart', component: ChartComponent },
+
   { path: '', redirectTo: '/table', pathMatch: 'full' }
 ];
 
