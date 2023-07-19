@@ -1,1 +1,21 @@
-<p>videos works!</p>
+
+<!-- <p>videos works!</p>
+<div class="carousel-wrapper">
+  <div *ngFor="let video of videos">
+    <iframe [src]="sanitizeUrl(video.url)" style="height: 500px; width: 800px; margin-left: 15rem;" allowfullscreen></iframe>
+  </div>
+</div> -->
+
+
+<div class="videos-grid">
+    <div class="video-card" *ngFor="let video of videos">
+      <div class="video-container">
+        <iframe [src]="sanitizeUrl(video.url)" allowfullscreen></iframe>
+        <button style="background-color: red;color: white; border-radius: 10px;" (click)="delete(video._id)">Delete</button>
+      </div>
+     
+      
+    </div>
+  </div>
+  
+  

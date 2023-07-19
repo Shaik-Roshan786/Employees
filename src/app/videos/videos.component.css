@@ -1,0 +1,28 @@
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .video-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .video-container {
+    position: relative;
+  }
+  
+  .video-container iframe {
+    height: 300px;
+    width: 100%;
+  }
+  
+  .video-container button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  

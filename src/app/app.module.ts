@@ -20,6 +20,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { VideosComponent } from './videos/videos.component';
 import { DetailsComponent } from './details/details.component';
 import { ChartComponent } from './chart/chart.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { ChartComponent } from './chart/chart.component';
     DashboardComponent,
     VideosComponent,
     DetailsComponent,
-    ChartComponent
+    ChartComponent,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

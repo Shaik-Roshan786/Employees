@@ -23,6 +23,7 @@ import Swal from 'sweetalert2';
           Company: new FormControl(""),
           Mobile: new FormControl(""),
           Email: new FormControl(""),
+          Password: new FormControl(""),
           Salary: new FormControl(""),
           Projectname: new FormControl("")
         })

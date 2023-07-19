@@ -1,0 +1,10 @@
+.bg-container {
+    background-image: url('https://img.freepik.com/premium-vector/network-connection-background-abstract-style_23-2148875738.jpg');
+    background-size: cover;
+    height: 100vh;
+}
+
+.addemployee {
+    margin-left: 300px;
+    padding: 120px;
+}
